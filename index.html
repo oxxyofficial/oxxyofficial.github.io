@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Black Website</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+        #message {
+            font-family: 'Times New Roman', serif;
+            font-size: 24px;
+            opacity: 0;
+            transition: opacity 1s ease-out; /* Smooth fade effect (1 second) */
+            animation: glitch-in 2s forwards;
+        }
+        @keyframes glitch-in {
+            0% {
+                opacity: 0;
+                transform: scale(0.5);
+                filter: blur(5px);
+            }
+            20% {
+                opacity: 0.5;
+                transform: scale(1.1);
+                filter: blur(3px);
+            }
+            40% {
+                opacity: 1;
+                transform: scale(1);
+                filter: blur(0);
+            }
+            60% {
+                opacity: 0.5;
+                transform: scale(0.95);
+                filter: blur(2px);
+            }
+            80% {
+                opacity: 0.7;
+                transform: scale(1.05);
+                filter: blur(1px);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+                filter: blur(0);
+            }
+        }
+
+        @keyframes glitch-out {
+            0% {
+                opacity: 1;
+                transform: translate(0, 0) scale(1);
+                filter: blur(0);
+            }
+            20% {
+                opacity: 0.7;
+                transform: translate(-10px, -10px) scale(1.05);
+                filter: blur(1px);
+            }
+            40% {
+                opacity: 0.5;
+                transform: translate(10px, 10px) scale(1.1);
+                filter: blur(3px);
+            }
+            60% {
+                opacity: 0.3;
+                transform: translate(-15px, -15px) scale(0.95);
+                filter: blur(5px);
+            }
+            80% {
+                opacity: 0.1;
+                transform: translate(20px, 20px) scale(0.9);
+                filter: blur(7px);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(30px, 30px) scale(0.8);
+                filter: blur(10px);
+            }
+        }
+
+        /* Style the link without underline */
+        a {
+            color: white;
+            text-decoration: none; /* No underline */
+        }
+        a:hover {
+            color: lightgray;
+        }
+    </style>
+</head>
+<body>
+    <div id="message">OXXY444</div>
+
+    <!-- Add an audio element for sound effects -->
+    <audio id="transition-sound" src="sound.mp3"></audio>
+
+    <script>
+        // Display the "OXXY444" message after 1 second
+        setTimeout(() => {
+            const messageElement = document.getElementById('message');
+            messageElement.style.opacity = 1;
+        }, 1000);
+
+        // Trigger the transition 2 seconds after the animation completes with a glitch-out effect
+        setTimeout(() => {
+            const messageElement = document.getElementById('message');
+            const soundElement = document.getElementById('transition-sound');
+
+            // Start the glitch-out effect for "OXXY444"
+            messageElement.style.animation = 'glitch-out 1s forwards';
+
+            // Play the sound effect
+            soundElement.play();
+
+            // Change the text to "Start Here" with a link after glitch-out effect
+            setTimeout(() => {
+                messageElement.innerHTML = '<a href="#" id="start-link">Start Here</a>';
+                messageElement.style.opacity = 0; // Hide the message temporarily
+
+                // Trigger the glitch-in animation for "Start Here"
+                setTimeout(() => {
+                    messageElement.style.animation = 'glitch-in 2s forwards';
+                    messageElement.style.opacity = 1; // Fade in "Start Here"
+                }, 50); // Small delay to allow animation reset
+
+                // Add event listener to apply glitch-out effect before navigating
+                const startLink = document.getElementById('start-link');
+                startLink.addEventListener('click', function (event) {
+                    event.preventDefault(); // Prevent immediate navigation
+
+                    // Apply glitch-out effect on link click
+                    messageElement.style.animation = 'glitch-out 1s forwards';
+                    
+                    // Delay navigation by 1 second to allow animation to complete
+                    setTimeout(() => {
+                        window.location.href = 'black-page.html'; // Navigate to black-page.html
+                    }, 1000); // Wait for the 1-second glitch-out to finish
+                });
+
+            }, 1000); // Wait for the 1-second glitch-out to complete
+        }, 3000); // 1 second initial delay + 2 seconds = 3 seconds total
+    </script>
+</body>
+</html>
+
+
+

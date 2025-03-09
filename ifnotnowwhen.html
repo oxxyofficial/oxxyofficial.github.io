@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>If Not Now, When?</title>
+    <style>
+        body {
+            background-color: black;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            color: white;
+            font-family: 'Times New Roman', serif;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 90%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 2s ease;
+        }
+
+        .container.visible {
+            opacity: 1;
+        }
+
+        /* TITLE TEXT */
+        .title {
+            font-size: 15px;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            opacity: 0;
+            transition: opacity 2s ease-in;
+        }
+
+        .title.visible {
+            opacity: 1;
+        }
+
+        /* ROTATING IMAGE CAROUSEL */
+        .carousel {
+            position: relative;
+            width: 800px; /* Matches total width of images */
+            height: 450px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            perspective: 1200px;
+        }
+
+        .carousel img {
+            position: absolute;
+            width: 400px;
+            height: auto;
+            object-fit: cover;
+            opacity: 0;
+            transform: scale(0.7) translateZ(-200px);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+
+        /* Dynamic positioning for the rotating effect */
+        .carousel img.active {
+            opacity: 1;
+            transform: scale(1.2) translateZ(0px);
+        }
+
+        .carousel img.prev {
+            opacity: 0.7;
+            transform: scale(0.9) translateX(-300px) translateZ(-120px);
+        }
+
+        .carousel img.next {
+            opacity: 0.7;
+            transform: scale(0.9) translateX(300px) translateZ(-120px);
+        }
+
+        /* TEXT BLOCK - Now matches the total width of the images */
+        .text-section {
+            width: 800px; /* Same width as the image carousel */
+            margin-top: 40px;
+            opacity: 0;
+            transition: opacity 2s ease-in;
+        }
+
+        .text-section.visible {
+            opacity: 1;
+        }
+
+        .text {
+            font-size: 13px;
+            line-height: 1.6;
+            text-align: center;
+            max-width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="content">
+        <!-- Title -->
+        <div class="title" id="title">If Not Now, When?</div>
+
+        <!-- 3D Rotating Image Carousel -->
+        <div class="carousel" id="carousel">
+            <img src="image1.jpg" class="active" alt="image1">
+            <img src="image2.jpg" class="next" alt="image2">
+            <img src="image3.jpg" class="prev" alt="image3">
+            <img src="image4.jpg" alt="image4">
+            <img src="image5.jpg" alt="image5">
+            <img src="image6.jpg" alt="image6">
+        </div>
+
+        <!-- Unified Text Below Images (Now Proportional to Image Width) -->
+        <div class="text-section" id="texts">
+            <div class="text">
+                oxxy444 is an organization that drives to give opportunities and inspiration. 
+                It is to provide opportunities for one’s dream to become a reality and an actualization, 
+                inspiring the community around us. There’s nothing more profound or less. 
+                It is with the pure intention to give and to create a movement of freedom.
+                <br><br>
+                The first exhibition, If Not Now, When?, explored the idea of hesitation. 
+                The desire to make an idea into reality is an expiration that flees us too often. 
+                From the years we only get to experience once to the expressions that we feel at a moment’s notice 
+                and to the nuances of life that feel like déjà vu, it is a gratitude to all for one to experience and express all.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const images = document.querySelectorAll(".carousel img");
+            let currentIndex = 0;
+
+            function updateCarousel() {
+                images.forEach((img, i) => {
+                    img.classList.remove("active", "prev", "next");
+
+                    if (i === currentIndex) {
+                        img.classList.add("active"); // Center image
+                    } else if (i === (currentIndex + 1) % images.length) {
+                        img.classList.add("next"); // Right-side image
+                    } else if (i === (currentIndex - 1 + images.length) % images.length) {
+                        img.classList.add("prev"); // Left-side image
+                    }
+                });
+            }
+
+            function rotateCarousel() {
+                currentIndex = (currentIndex + 1) % images.length;
+                updateCarousel();
+            }
+
+            setInterval(rotateCarousel, 3000); // Rotate every 3 seconds
+
+            updateCarousel(); // Initial state
+
+            setTimeout(() => {
+                document.getElementById('content').classList.add('visible');
+            }, 1000);
+
+            setTimeout(() => {
+                document.getElementById('title').classList.add('visible');
+            }, 1500);
+
+            setTimeout(() => {
+                document.getElementById('texts').classList.add('visible');
+            }, 3500);
+        });
+    </script>
+
+<!-- New Section: Four Content Sections Underneath Everything -->
+<div class="sections-container">
+    <div class="section">
+        <img src="image7.jpg" alt="Image 1">
+        <div class="section-text">
+            <strong>Pittsburgh</strong><br>
+            <br>
+            This was a photo taken in Pittsburgh, Pennsylvania. I enjoyed the highlights and the fuzzy quality of the overall composition. However, the most appealing trait was the general coloration of the photo.
+            What was a picture of a motorcycle turned out to be an accurate representation of my identity. The fuzzy outlines of the bike started to look like the walls, roof, and chimneys of a Hanok house, a traditional Korean home. It synced completely with my identity as a Korean on American soil, and even more so since I felt more in tune with the culture of America than Korea. The fuzzy quality of the image conveyed a sense of confusion about where my real identity stood, a grey area between a Korean and an American.
+        </div>
+    </div>
+
+    <div class="section">
+        <img src="image8.jpg" alt="Image 2">
+        <div class="section-text">
+            <strong>Wall</strong><br>
+            <br>
+            This photo was taken at Oxford University, England. It shows a door leading into one of the many schools of Oxford.
+            Through this photo, I wanted to convey the metaphoric saying of hitting a wall. When we hit a wall with a profession, study, or life, we take a few steps back and assess our lives as a whole. A similar action is taken quite frequently by artists working on a big canvas. They step back numerous times to check if the general ratio of the composition still makes sense. If the artist only works on a smaller area of the composition, it’s more likely that the details won’t align with the ratio of the composition. I feel this notion with Korean society. Generally speaking, an average Korean student strives to get into a good high school, a good college, a good job, and a good retirement. The obsessive process feels like too much, focusing only on one part of a canvas: life. The liberation of emotions and thoughts one is open to have in this life disappears because there are things only a certain age and time can feel. To be conscious of our conditional existence and the wonders of life around us. To understand what that means, feel it breathing through your skin. This is a practice that can only be practiced at any age, yet how profound would it be to become ahold of these ideas when still experiencing the new in life?
+            Like these walls aren’t broken down but only distorted, my message to one is not to break the walls of standard but to put one’s own freedom of expression and thought into these standards to make one’s life of one’s own intent and will.
+        </div>
+    </div>
+
+    <div class="section">
+        <img src="image9.jpg" alt="Image 3">
+        <div class="section-text">
+            <strong>Moss</strong><br>
+            <br>
+            Moss 1 and 2 are inverted versions of the same photo. While they are inverted color-wise, they are also inverted in the sense that one has a physically positive state while the other has a physically negative state. When looked closely, one can realize that maybe these dots spread throughout convey words in brail. And yes, they do convey daily words in brail. However, is it really the truth that we see brail in these series? Is brail even brail if put on a 2D surface?
+            I really wanted these two pieces to convey the relationship between reality and truth. We realize everything that is observed isn’t as simple as being observed. There are so many other axioms that provide us information for the observed to be observational. What does this mean in relation to the universe, human relations, or even us and ourselves? How can we find the middle ground of peace?
+        </div>
+    </div>
+
+    <div class="section">
+        <img src="image10.jpg" alt="Image 4">
+        <div class="section-text">
+            <strong>Symmetry</strong><br>
+            <br>
+            Symmetry talks about a significant individual fading away from your memory. All the information about the memory is there except the person. However, if it’s a memory with an important person, the whole point of the memory is likely the person. If the entire point of that memory is gone, would the memory still be the same? Or a new one?
+            Symmetry talks about the world flipping upside down as someone like your lover disappears from your memory. Therefore, I thought an inverted world accurately expressed this type of phenomenon. As the world is flipped, the colors are all flipped into opposites. Hypothetically, if I could flip this current reality or invert it, would I be able to see the memory as it is? Maybe.
+        </div>
+    </div>
+</div>
+
+<style>
+    html, body {
+        height: auto;
+        min-height: 100vh;
+        overflow-y: auto;
+        padding-left: 5vw; /* Adds space between content and website edges */
+        padding-right: 5vw;
+    }
+
+    .sections-container {
+        width: 90%;
+        max-width: 1200px;
+        margin-top: 120px;
+        padding-bottom: 100px;
+        display: flex;
+        flex-direction: column;
+        gap: 50px;
+        opacity: 1;
+    }
+
+    .section {
+        display: flex;
+        align-items: center;
+        gap: 40px;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .section-text {
+        font-size: 14px;
+        flex: 1;
+        text-align: left;
+        opacity: 1;
+    }
+
+    .section img {
+        width: 35%;
+        height: auto;
+        object-fit: cover;
+        opacity: 1;
+    }
+
+    .section:nth-child(even) {
+        flex-direction: row-reverse;
+    }
+</style>
+<br>
+<br>
+<br>
+<br>
+<br>
+<!-- New Section: Downloadable Files with Thumbnails (Standalone) -->
+<div class="download-section">
+    <p>Download below</p>
+    <br>
+    <div class="download-container">
+        <div class="download-item">
+            <img src="memories1_thumbnail.jpg" alt="Memories 1 Preview">
+            <a href="memories1.pdf" download class="download-button">Collection of Memories</a>
+        </div>
+
+        <div class="download-item">
+            <img src="oxxy444_booklet_thumbnail.jpg" alt="Oxxy444 Booklet Preview">
+            <a href="oxxy444_booklet.pdf" download class="download-button">Tapes and Measurements</a>
+        </div>
+
+        <div class="download-item">
+            <img src="oxxy444_180x230_thumbnail.jpg" alt="Oxxy444 180x230 Preview">
+            <a href="oxxy444_180x230.pdf" download class="download-button">If Not Now, When? Exhibition Booklet</a>
+        </div>
+    </div>
+</div>
+
+<style>
+    .download-section {
+        width: 100%;
+        text-align: center;
+        margin-top: 150px;
+        padding-bottom: 100px;
+    }
+
+    .download-container {
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+        flex-wrap: wrap;
+    }
+
+    .download-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        max-width: 200px;
+    }
+
+    .download-item img {
+        width: 200px;
+        height: auto;
+        margin-bottom: 15px;
+        border-radius: 5px;
+        border: 2px solid white;
+    }
+
+    .download-button {
+        display: inline-block;
+        padding: 12px 24px;
+        font-size: 16px;
+        color: white;
+        background-color: #444;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s, transform 0.2s;
+    }
+
+    .download-button:hover {
+        background-color: #666;
+        transform: scale(1.05);
+    }
+</style>
+
+
+
+</body>
+</html>

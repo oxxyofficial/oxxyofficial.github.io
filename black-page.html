@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Black Page</title>
+    <style>
+        body {
+            background-color: black;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            overflow: hidden;
+            color: white;
+            font-family: 'Times New Roman', serif;
+        }
+
+        #text {
+            opacity: 1;
+            font-size: 24px;
+            transition: opacity 2s ease;
+        }
+
+        #link {
+            opacity: 0; /* Initially hidden */
+            font-size: 24px;
+            color: white;
+            text-decoration: none;
+            margin-top: 20px;
+            transition: opacity 2s ease, transform 0.3s ease;
+            transform: scale(1);
+        }
+
+        #link:hover {
+            transform: scale(1.1); /* Slight zoom effect like images */
+        }
+
+        .link-container {
+            display: flex;
+            opacity: 0; /* Initially hidden */
+            margin-top: 20px;
+            transition: opacity 2s ease;
+        }
+
+        .link-container img {
+            width: 100px;
+            height: 100px;
+            margin: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .link-container img:hover {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <div id="text">OXXY444 the first pendulum of R</div>
+
+    <!-- Smoothly appearing link -->
+    <a href="ifnotnowwhen.html" id="link">If Not Now, When?</a>
+
+    <script>
+        setTimeout(() => {
+            document.getElementById('text').style.opacity = 0;
+        }, 2000);
+
+        setTimeout(() => {
+            document.getElementById('link').style.opacity = 1;
+        }, 4000);
+    </script>
+</body>
+</html>
